@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <!--height를 match_parent로 할 경우 item 뷰가 짤림 -->
+
+    <include layout="@layout/separation"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/bar_userInfo">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/iv_profile_photo"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="25dp"
+                android:layout_centerVertical="true">
+            </de.hdodenhof.circleimageview.CircleImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="UserName"
+                android:layout_toRightOf="@+id/iv_profile_photo"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:id="@+id/tv_username"
+                android:textColor="@color/black">
+            </TextView>
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_more"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:id="@+id/iv_more">
+            </ImageView>
+        </RelativeLayout>
+
+        <com.example.sns.utill.SquareImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/iv_post"
+            android:layout_below="@+id/bar_userInfo"
+            android:scaleType="centerCrop">
+        </com.example.sns.utill.SquareImageView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/bar_icon"
+            android:layout_below="@+id/iv_post">
+
+            <RelativeLayout
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:id="@+id/layout_tripticon"
+                android:background="@color/white">
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:id="@+id/iv_tripticon_fill"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/ic_tripticon_fill"
+                    android:visibility="invisible">
+                </ImageView>
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:id="@+id/iv_tripticon_empty"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/ic_tripticon_empty"
+                    android:visibility="visible">
+                </ImageView>
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:id="@+id/speech_bubble"
+                android:layout_toRightOf="@+id/layout_tripticon"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ic_comment"
+                android:visibility="visible"
+                android:layout_centerVertical="true">
+            </ImageView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/layout_content"
+            android:layout_below="@+id/bar_icon"
+            android:padding="20dp"
+            android:layout_marginBottom="50dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="좋아요 한 사람들"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:id="@+id/tv_likes">
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="게시글 내용"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:id="@+id/tv_caption"
+                android:layout_below="@+id/tv_likes"
+                android:layout_marginTop="15dp">
+            </TextView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/layout_caption"
+                android:layout_below="@id/tv_caption"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="여행타입"
+                    android:textStyle="bold">
+                </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_triptype">
+                </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="여행기간"
+                    android:textStyle="bold">
+                </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_period">
+                </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="여행인원"
+                    android:textStyle="bold">
+                </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_people">
+                </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="교통수단"
+                    android:textStyle="bold">
+                </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_traffic">
+                </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="여행비용"
+                    android:textStyle="bold">
+                </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_cost">
+                </TextView>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="더보기"
+                android:textColor="@color/grey"
+                android:textSize="18sp"
+                android:id="@+id/tv_moreContent"
+                android:layout_below="@+id/layout_caption"
+                android:layout_marginTop="15dp">
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3일전"
+                android:textColor="@color/grey"
+                android:textSize="18sp"
+                android:id="@+id/tv_time_posted"
+                android:layout_below="@+id/tv_moreContent"
+                android:layout_marginTop="15dp">
+            </TextView>
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <include layout="@layout/separation"/>
+</RelativeLayout>

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TWIPEE_SNS</string>
+    <string name="comment_activity">댓글</string>
+    <string name="search_activity">검색</string>
+</resources>

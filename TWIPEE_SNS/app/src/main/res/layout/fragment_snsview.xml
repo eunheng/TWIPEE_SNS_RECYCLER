@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/bar_feedSearchBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:minHeight="48dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/et_feedSearchBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:hint="검색"
+            android:maxLines="6" />
+
+        <Button
+            android:id="@+id/btn_feedSearch"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="bottom"
+            android:clickable="true"
+            android:gravity="center"
+            android:backgroundTint="@color/white"
+            android:drawableLeft="@drawable/ic_search"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bar_favorite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:minHeight="40dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_favorite"
+            android:text="관심사"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:textAlignment="center">
+
+        </TextView>
+
+    </LinearLayout>
+
+    <include layout="@layout/separation"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:background="@null"
+        android:cacheColorHint="#00000000"
+        android:listSelector="#00000000"
+        android:scrollbars="none"
+        android:id="@+id/SNSListView"
+        android:overScrollMode="never"
+        android:fadingEdge="none"
+        android:divider="@null" />
+
+</LinearLayout>

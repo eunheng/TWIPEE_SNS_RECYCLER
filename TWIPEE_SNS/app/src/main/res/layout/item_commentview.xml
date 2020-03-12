@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/border_toolbar">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/iv_profile_photo"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="25dp"
+            android:layout_centerVertical="true">
+        </de.hdodenhof.circleimageview.CircleImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="UserName"
+            android:layout_toRightOf="@+id/iv_profile_photo"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/tv_username"
+            android:textColor="@color/black">
+        </TextView>
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_like"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:id="@+id/iv_like">
+        </ImageView>
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/tv_comment"
+        android:text="댓글 내용"
+        android:textSize="14sp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/tv_commentCreated"
+        android:text="달린 날짜"
+        android:textSize="10sp"
+        android:textColor="@color/grey">
+
+    </TextView>
+</LinearLayout>
