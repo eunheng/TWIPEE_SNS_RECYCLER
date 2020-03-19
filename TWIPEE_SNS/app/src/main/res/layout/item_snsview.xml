@@ -47,19 +47,17 @@
             </ImageView>
         </RelativeLayout>
 
-        <com.example.sns.utill.SquareImageView
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/vp_post"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/iv_post"
-            android:layout_below="@+id/bar_userInfo"
-            android:scaleType="centerCrop">
-        </com.example.sns.utill.SquareImageView>
+            android:layout_height="400dp"
+            android:layout_below="@+id/bar_userInfo" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:id="@+id/bar_icon"
-            android:layout_below="@+id/iv_post">
+            android:layout_below="@+id/vp_post">
 
             <RelativeLayout
                 android:layout_width="60dp"

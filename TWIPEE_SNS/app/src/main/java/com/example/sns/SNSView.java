@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,6 +40,7 @@ public class SNSView extends Fragment implements View.OnClickListener{
     private RecyclerView recyclerView;
 
     private SNSRecyclerAdapter adapter;
+    private FragmentManager fm;
     private Intent intent;
     private int resultsCount = 0;
     private ArrayList<DataModelUserSetting> DMUserSetting;
@@ -67,7 +69,8 @@ public class SNSView extends Fragment implements View.OnClickListener{
         list.add(dataModelSNS);
         list.add(dataModelSNS);
         recyclerView.setHasFixedSize(true);
-        adapter = new SNSRecyclerAdapter(getActivity(), list);
+        fm = getActivity().getSupportFragmentManager();
+        adapter = new SNSRecyclerAdapter(getActivity(), list, fm);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
     }

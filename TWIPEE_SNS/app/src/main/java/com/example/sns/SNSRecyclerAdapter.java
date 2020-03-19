@@ -1,7 +1,9 @@
 package com.example.sns;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.sns.DataModel.DataModelLike;
 import com.example.sns.DataModel.DataModelSNS;
@@ -29,14 +34,19 @@ public class SNSRecyclerAdapter extends RecyclerView.Adapter<SNSRecyclerAdapter.
     private int mLayoutResource;
     private Intent intent;
     private String currentUsername = "";
+    private FragmentManager fm;
+
+    // 임시로 Fragment로 넘길 Image Resource
+    ArrayList<Integer> listImage;
 
     private ArrayList<DataModelSNS> list = new ArrayList<>();
 
     private int temp = 0;
 
-    public SNSRecyclerAdapter(@NonNull Context context, ArrayList<DataModelSNS> list) {
+    public SNSRecyclerAdapter(@NonNull Context context, ArrayList<DataModelSNS> list, FragmentManager fragmentManager) {
         this.mContext = context;
         this.list = list;
+        this.fm = fragmentManager;
     }
 
     @Override
@@ -69,6 +79,31 @@ public class SNSRecyclerAdapter extends RecyclerView.Adapter<SNSRecyclerAdapter.
         //여행 비용
         holder.cost.setText(list.get(itemposition).getCost());
 
+        //image viewpager 임시 데이터
+        listImage = new ArrayList<>();
+        listImage.add(R.drawable.chico1);
+        listImage.add(R.drawable.toystory);
+        listImage.add(R.drawable.parking);
+        //ImageView pager
+        holder.vp_post.setAdapter(holder.pagerAdapter);
+        if(listImage.size()!=0)
+        {
+            holder.vp_post.setVisibility(View.VISIBLE);
+            for (int i = 0; i < listImage.size(); i++) {
+                SNSPostViewPager postViewPager = new SNSPostViewPager();
+                Bundle bundle = new Bundle();
+                bundle.putInt("imgRes", listImage.get(i));
+                postViewPager.setArguments(bundle);
+                holder.pagerAdapter.addImage(postViewPager);
+            }
+            holder.pagerAdapter.notifyDataSetChanged();
+        }
+        else
+        {
+            holder.vp_post.setVisibility(View.GONE);
+        }
+
+
         //아이템 내의 component에 대한 클릭 리스너 정의
         holder.mprofileImage.setOnClickListener(this);
         holder.more.setOnClickListener(this);
@@ -76,7 +111,6 @@ public class SNSRecyclerAdapter extends RecyclerView.Adapter<SNSRecyclerAdapter.
         holder.comment.setOnClickListener(this);
         holder.likes.setOnClickListener(this);
         holder.moreContent.setOnClickListener(this);
-
     }
 
     // 몇개의 데이터를 리스트로 뿌려줘야하는지 반드시 정의해줘야한다
@@ -117,7 +151,9 @@ public class SNSRecyclerAdapter extends RecyclerView.Adapter<SNSRecyclerAdapter.
         CircleImageView mprofileImage;
         TextView username, tripType, perioid, people, traffic, cost, caption, likes, moreContent, timeDetla;
 
-        SquareImageView image;
+        //SquareImageView image;
+        ViewPager vp_post;
+        SNSPostViewPagerAdapter pagerAdapter;
         ImageView more, tripticonFill, tripticonEmpty, comment;
         boolean likeByCurrentUser;
 
@@ -131,7 +167,9 @@ public class SNSRecyclerAdapter extends RecyclerView.Adapter<SNSRecyclerAdapter.
             mprofileImage = (CircleImageView) view.findViewById(R.id.iv_profile_photo);
             username = (TextView) view.findViewById(R.id.tv_username);
             more = (ImageView) view.findViewById(R.id.iv_more);
-            image = (SquareImageView) view.findViewById(R.id.iv_post);
+            //image = (SquareImageView) view.findViewById(R.id.iv_post);
+            vp_post = (ViewPager) view.findViewById(R.id.vp_post);
+            pagerAdapter = new SNSPostViewPagerAdapter(fm);
             tripticonFill = (ImageView) view.findViewById(R.id.iv_tripticon_fill);
             tripticonEmpty = (ImageView) view.findViewById(R.id.iv_tripticon_empty);
             comment = (ImageView) view.findViewById(R.id.speech_bubble);
