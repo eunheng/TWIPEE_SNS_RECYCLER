@@ -3,6 +3,10 @@ package com.example.sns.DataModel;
 public class DataModelLike {
     private  String user_id;
 
+    public DataModelLike(String user_id) {
+        this.user_id = user_id;
+    }
+
     public String getUser_id() {
         return user_id;
     }

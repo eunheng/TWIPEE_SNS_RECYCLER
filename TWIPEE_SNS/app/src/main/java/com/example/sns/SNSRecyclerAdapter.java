@@ -1,6 +1,5 @@
 package com.example.sns;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,9 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -20,7 +19,6 @@ import com.example.sns.DataModel.DataModelLike;
 import com.example.sns.DataModel.DataModelSNS;
 import com.example.sns.DataModel.DataModelUser;
 import com.example.sns.DataModel.DataModelUserSetting;
-import com.example.sns.utill.SquareImageView;
 
 import java.util.ArrayList;
 
@@ -105,7 +103,7 @@ public class SNSRecyclerAdapter extends RecyclerView.Adapter<SNSRecyclerAdapter.
 
 
         //아이템 내의 component에 대한 클릭 리스너 정의
-        holder.mprofileImage.setOnClickListener(this);
+        holder.username.setOnClickListener(this);
         holder.more.setOnClickListener(this);
         holder.tripticonEmpty.setOnClickListener(this);
         holder.comment.setOnClickListener(this);
@@ -122,11 +120,11 @@ public class SNSRecyclerAdapter extends RecyclerView.Adapter<SNSRecyclerAdapter.
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.iv_profile_photo:    //유저 페이지로 이동
-                temp = 0;
+            case R.id.tv_username:    //유저 페이지로 이동
+                Toast.makeText(mContext,"유저페이지로 이동", Toast.LENGTH_SHORT).show();;
                 break;
             case R.id.iv_more:    //수정/삭제 등 다이얼로그 띄우기
-                temp = 1;
+                Toast.makeText(mContext,"게시물 옵션 더보기", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.iv_tripticon_empty:    //좋아요 누르기
                 temp = 2;
@@ -136,7 +134,8 @@ public class SNSRecyclerAdapter extends RecyclerView.Adapter<SNSRecyclerAdapter.
                 mContext.startActivity(intent);
                 break;
             case R.id.tv_likes:    //좋아요 누른 사람 목록창으로 이동
-                temp = 4;
+                intent = new Intent(view.getContext(),LikeUserActivity.class);
+                mContext.startActivity(intent);
                 break;
             case R.id.tv_moreContent:    //더보기 눌러서 내용 더보기
                 temp = 5;
@@ -159,7 +158,7 @@ public class SNSRecyclerAdapter extends RecyclerView.Adapter<SNSRecyclerAdapter.
 
         DataModelUserSetting DMuserSetting = new DataModelUserSetting();
         DataModelUser DMuser = new DataModelUser();
-        DataModelLike DMLike = new DataModelLike();
+        //DataModelLike DMLike = new DataModelLike();
         DataModelSNS DMSNS = new DataModelSNS();
 
         public Holder(View view){

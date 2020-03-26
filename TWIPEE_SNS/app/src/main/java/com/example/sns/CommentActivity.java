@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -55,6 +56,7 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
         initRecyclerViewRefresh();
 
         iv_back.setOnClickListener(this);
+        iv_profile_photo.setOnClickListener(this);
         btn_addComment.setOnClickListener(this);
     }
 
@@ -78,6 +80,9 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
         switch (view.getId()) {
             case R.id.backArrow:    //댓글창 끄기
                 finish();
+                break;
+            case R.id.iv_profile_photo:    //유저 페이지로 이동
+                Toast.makeText(this,"유저페이지로 이동", Toast.LENGTH_SHORT).show();;
                 break;
             case R.id.btn_addComment:    //댓글 달기
                 break;

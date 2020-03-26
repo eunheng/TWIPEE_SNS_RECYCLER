@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -58,7 +59,7 @@ public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecycler
         holder.timeDetla.setText(list.get(itemposition).getDate_created());
 
         //아이템 내의 component에 대한 클릭 리스너 정의
-        holder.mprofileImage.setOnClickListener(this);
+        holder.username.setOnClickListener(this);
         holder.like.setOnClickListener(this);
 
     }
@@ -71,8 +72,8 @@ public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecycler
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.iv_profile_photo:    //유저 페이지로 이동
-                temp = 0;
+            case R.id.tv_username:    //유저 페이지로 이동
+                Toast.makeText(mContext,"유저페이지로 이동", Toast.LENGTH_SHORT).show();;
                 break;
             case R.id.iv_like:    //좋아요 누르기
                 temp = 2;
@@ -91,7 +92,7 @@ public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecycler
 
         DataModelUserSetting DMUserSetting = new DataModelUserSetting();
         DataModelUser DMUser = new DataModelUser();
-        DataModelLike DMLike = new DataModelLike();
+        //DataModelLike DMLike = new DataModelLike();
         DataModelSNS DMSNS = new DataModelSNS();
 
         public Holder(View view) {
