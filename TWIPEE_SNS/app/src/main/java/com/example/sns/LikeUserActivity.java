@@ -69,6 +69,5 @@ public class LikeUserActivity extends AppCompatActivity implements View.OnClickL
             default:
                 break;
         }
-        
     }
 }

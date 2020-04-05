@@ -137,8 +137,9 @@ public class SNSRecyclerAdapter extends RecyclerView.Adapter<SNSRecyclerAdapter.
                 intent = new Intent(view.getContext(),LikeUserActivity.class);
                 mContext.startActivity(intent);
                 break;
-            case R.id.tv_moreContent:    //더보기 눌러서 내용 더보기
-                temp = 5;
+            case R.id.tv_moreContent:    //게시물 상세 보기
+                intent = new Intent(view.getContext(),SNSPostDetailActivity.class);
+                mContext.startActivity(intent);
                 break;
             default:
                 break;

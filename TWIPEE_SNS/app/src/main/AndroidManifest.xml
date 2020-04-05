@@ -28,6 +28,9 @@
         <activity
             android:name=".LikeUserActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SNSPostDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
