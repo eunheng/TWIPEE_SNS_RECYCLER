@@ -66,16 +66,16 @@ public class SNSRecyclerAdapter extends RecyclerView.Adapter<SNSRecyclerAdapter.
         holder.caption.setText(list.get(itemposition).getContent());
         //올린 시간
         holder.timeDetla.setText(list.get(itemposition).getData_created());
-        //여행 타입
-        holder.tripType.setText(list.get(itemposition).getType());
-        //여행 기간
-        holder.perioid.setText(list.get(itemposition).getPeriod());
-        //여행 인원
-        holder.people.setText(list.get(itemposition).getPeople());
-        //교통 수단
-        holder.traffic.setText(list.get(itemposition).getTraffic());
-        //여행 비용
-        holder.cost.setText(list.get(itemposition).getCost());
+//        //여행 타입
+//        holder.tripType.setText(list.get(itemposition).getType());
+//        //여행 기간
+//        holder.perioid.setText(list.get(itemposition).getPeriod());
+//        //여행 인원
+//        holder.people.setText(list.get(itemposition).getPeople());
+//        //교통 수단
+//        holder.traffic.setText(list.get(itemposition).getTraffic());
+//        //여행 비용
+//        holder.cost.setText(list.get(itemposition).getCost());
 
         //image viewpager 임시 데이터
         listImage = new ArrayList<>();
@@ -149,7 +149,8 @@ public class SNSRecyclerAdapter extends RecyclerView.Adapter<SNSRecyclerAdapter.
 
     public class Holder extends RecyclerView.ViewHolder {
         CircleImageView mprofileImage;
-        TextView username, tripType, perioid, people, traffic, cost, caption, likes, moreContent, timeDetla;
+        //TextView username, tripType, perioid, people, traffic, cost, caption, likes, moreContent, timeDetla;
+        TextView username, caption, likes, moreContent, timeDetla;
 
         //SquareImageView image;
         ViewPager vp_post;
@@ -175,11 +176,11 @@ public class SNSRecyclerAdapter extends RecyclerView.Adapter<SNSRecyclerAdapter.
             comment = (ImageView) view.findViewById(R.id.speech_bubble);
             likes = (TextView) view.findViewById(R.id.tv_likes);
             caption = (TextView) view.findViewById(R.id.tv_caption);
-            tripType = (TextView) view.findViewById(R.id.tv_triptype);
-            perioid = (TextView) view.findViewById(R.id.tv_period);
-            people = (TextView) view.findViewById(R.id.tv_people);
-            traffic = (TextView) view.findViewById(R.id.tv_traffic);
-            cost = (TextView) view.findViewById(R.id.tv_cost);
+//            tripType = (TextView) view.findViewById(R.id.tv_triptype);
+//            perioid = (TextView) view.findViewById(R.id.tv_period);
+//            people = (TextView) view.findViewById(R.id.tv_people);
+//            traffic = (TextView) view.findViewById(R.id.tv_traffic);
+//            cost = (TextView) view.findViewById(R.id.tv_cost);
             moreContent = (TextView) view.findViewById(R.id.tv_moreContent);
             timeDetla = (TextView) view.findViewById(R.id.tv_time_posted);
         }
