@@ -13,8 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sns.DataModel.DataModelComment;
-import com.example.sns.DataModel.DataModelLike;
-import com.example.sns.DataModel.DataModelSNS;
+import com.example.sns.DataModel.Model_SNS_Post;
 import com.example.sns.DataModel.DataModelUser;
 import com.example.sns.DataModel.DataModelUserSetting;
 
@@ -93,7 +92,7 @@ public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecycler
         DataModelUserSetting DMUserSetting = new DataModelUserSetting();
         DataModelUser DMUser = new DataModelUser();
         //DataModelLike DMLike = new DataModelLike();
-        DataModelSNS DMSNS = new DataModelSNS();
+        Model_SNS_Post DMSNS = new Model_SNS_Post();
 
         public Holder(View view) {
             super(view);

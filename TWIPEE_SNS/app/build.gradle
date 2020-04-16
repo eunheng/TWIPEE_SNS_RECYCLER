@@ -1,11 +1,12 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.1"
     defaultConfig {
-        applicationId "com.example.twipee_sns"
-        minSdkVersion 15
+        applicationId "com.example.sns"
+        minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -32,4 +33,5 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.1.0'
     //ElasticListView
     implementation 'com.github.eschao:android-ElasticListView:v1.0'
+    implementation 'com.google.firebase:firebase-database:19.2.1'
 }
