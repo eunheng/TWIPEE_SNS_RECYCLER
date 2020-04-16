@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "153954306981",
+    "firebase_url": "https://snsview-75df8.firebaseio.com",
+    "project_id": "snsview-75df8",
+    "storage_bucket": "snsview-75df8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:153954306981:android:fc7046925d564f1cdbf64c",
+        "android_client_info": {
+          "package_name": "com.example.sns"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "153954306981-q8ppr07d9ej7hpt82t3k9ur6t0dt08q7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sns",
+            "certificate_hash": "170e853d19b12b91f6278887a82276c43eee6b62"
+          }
+        },
+        {
+          "client_id": "153954306981-tgsrf98h2tu8jh9f8cejlckdufvstm54.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWG0PzM6PfbO-1tVCYXpRPWODlKJIbOYY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "153954306981-tgsrf98h2tu8jh9f8cejlckdufvstm54.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
