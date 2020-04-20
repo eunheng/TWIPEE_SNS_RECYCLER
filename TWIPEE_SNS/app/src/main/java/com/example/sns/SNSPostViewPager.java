@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.example.sns.utill.SquareImageView;
 
 public class SNSPostViewPager extends Fragment {
@@ -28,7 +29,8 @@ public class SNSPostViewPager extends Fragment {
         if (getArguments() != null) {
             Bundle args = getArguments();
             //받아온 Resource를 ImageView로
-            iv_post.setImageResource(args.getInt("imgRes"));
+            Glide.with(this).load(args.getString("imgRes")).into(iv_post);
+            //iv_post.setImageResource(args.getString("imgRes"));
         }
 
         return view;

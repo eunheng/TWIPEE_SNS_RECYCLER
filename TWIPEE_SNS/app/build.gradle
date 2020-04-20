@@ -34,4 +34,6 @@ dependencies {
     //ElasticListView
     implementation 'com.github.eschao:android-ElasticListView:v1.0'
     implementation 'com.google.firebase:firebase-database:19.2.1'
+    // FirebaseUI Storage only
+    implementation 'com.firebaseui:firebase-ui-storage:4.3.1'
 }

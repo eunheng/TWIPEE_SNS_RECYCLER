@@ -2,6 +2,7 @@ package com.example.sns;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +16,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.bumptech.glide.Glide;
 import com.example.sns.DataModel.Model_SNS_Post;
 import com.example.sns.DataModel.DataModelUser;
 import com.example.sns.DataModel.DataModelUserSetting;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -34,6 +39,9 @@ public class SNSRecyclerAdapter extends RecyclerView.Adapter<SNSRecyclerAdapter.
 
     // 임시로 Fragment로 넘길 Image Resource
     ArrayList<Integer> listImage;
+    ArrayList<String> listImage2;
+    private int intViewpager;
+    private String strViewpager;
 
     private ArrayList<Model_SNS_Post> list = new ArrayList<>();
 
@@ -98,6 +106,45 @@ public class SNSRecyclerAdapter extends RecyclerView.Adapter<SNSRecyclerAdapter.
 //        {
 //            holder.vp_post.setVisibility(View.GONE);
 //        }
+
+
+
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+        //image viewpager 임시 데이터(파이어베이스에 저장된 사진 갯수를 어떻게 알 수 있지)
+        //저장소 주소는 알아냈는데 그 아래 복수의 이미지를 어케 가지고 올 것인가....
+
+        //이미지 배열
+        listImage = new ArrayList<>();
+        listImage2 = new ArrayList<>();
+        //스토리지에서 스트링으로 가져오기
+        //strViewpager = storageReference.getDownloadUrl().toString();
+        strViewpager = Glide.with(mContext).load(storageReference).toString();
+        //인트형으로 변환
+//        intViewpager = Integer.parseInt(strViewpager);
+//        //
+        listImage2.add(strViewpager);
+        //ImageView pager
+        holder.vp_post.setAdapter(holder.pagerAdapter);
+        if(listImage2.size()!=0)
+        {
+            holder.vp_post.setVisibility(View.VISIBLE);
+            for (int i = 0; i < listImage2.size(); i++) {
+                SNSPostViewPager postViewPager = new SNSPostViewPager();
+                Bundle bundle = new Bundle();
+                bundle.putString("imgRes", listImage2.get(i));
+                postViewPager.setArguments(bundle);
+                holder.pagerAdapter.addImage(postViewPager);
+            }
+            holder.pagerAdapter.notifyDataSetChanged();
+        }
+        else
+        {
+            holder.vp_post.setVisibility(View.GONE);
+        }
+
+
+
+
 
 
         //아이템 내의 component에 대한 클릭 리스너 정의
