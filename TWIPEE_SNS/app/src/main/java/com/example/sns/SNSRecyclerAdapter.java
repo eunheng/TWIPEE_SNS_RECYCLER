@@ -2,7 +2,6 @@ package com.example.sns;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,11 +19,20 @@ import com.bumptech.glide.Glide;
 import com.example.sns.DataModel.Model_SNS_Post;
 import com.example.sns.DataModel.DataModelUser;
 import com.example.sns.DataModel.DataModelUserSetting;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.security.KeyStore;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -40,18 +48,49 @@ public class SNSRecyclerAdapter extends RecyclerView.Adapter<SNSRecyclerAdapter.
     // 임시로 Fragment로 넘길 Image Resource
     ArrayList<Integer> listImage;
     ArrayList<String> listImage2;
+
     private int intViewpager;
     private String strViewpager;
 
+    private HashMap<String, Model_SNS_Post> SNS_Post_list = new HashMap<String, Model_SNS_Post>();
+    private LinkedHashMap<String, Model_SNS_Post> real_SNS_Post_list = new LinkedHashMap<String, Model_SNS_Post>();
+    private ArrayList<String> Keylist = new ArrayList<>();
     private ArrayList<Model_SNS_Post> list = new ArrayList<>();
 
     private int temp = 0;
 
-    public SNSRecyclerAdapter(@NonNull Context context, ArrayList<Model_SNS_Post> list, FragmentManager fragmentManager) {
-        this.mContext = context;
-        this.list = list;
-        this.fm = fragmentManager;
+    public static List<String> sortByValue(final Map<String, Model_SNS_Post> map) {
+        List<String> lista = new ArrayList<String>();
+        lista.addAll(map.keySet());
+
+        Collections.sort(lista, new Comparator<String>() {
+            public int compare(String o1, String o2) {
+                String v1 = map.get(o1).getCreatedDate();
+                String v2 = map.get(o2).getCreatedDate();
+                return ((Comparable<String>) v1).compareTo(v2);
+            }
+        });
+        return lista;
     }
+
+
+    public SNSRecyclerAdapter(@NonNull Context context, final HashMap<String, Model_SNS_Post> SNS_Post_list, FragmentManager fragmentManager) {
+        this.mContext = context;
+        this.SNS_Post_list = SNS_Post_list;
+        this.fm = fragmentManager;
+
+        List<String> resultList = sortByValue(SNS_Post_list);
+        Iterator<String> it = resultList.iterator();
+        while(it.hasNext()) {
+            String key = it.next();
+            Keylist.add(key);
+            real_SNS_Post_list.put(key, SNS_Post_list.get(key));
+        }
+        for(Map.Entry<String,Model_SNS_Post> entry : real_SNS_Post_list.entrySet()){
+            list.add(entry.getValue());
+        }
+    }
+
 
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -65,13 +104,15 @@ public class SNSRecyclerAdapter extends RecyclerView.Adapter<SNSRecyclerAdapter.
         // 각 위치에 문자열 세팅
         int itemposition = position;
 
+
         //데이터 불러와서 아이템 셋팅
+
         //유저 이름
         holder.PublisherID.setText(list.get(itemposition).getPublisherID());
         //게시글 내용 불러오기
         holder.Body.setText(list.get(itemposition).getBody());
         //올린 시간
-        holder.timeDetla.setText(list.get(itemposition).getCreatedData());
+        holder.timeDetla.setText(list.get(itemposition).getCreatedDate());
 //        //여행 타입
 //        holder.tripType.setText(list.get(itemposition).getType());
 //        //여행 기간
@@ -177,6 +218,7 @@ public class SNSRecyclerAdapter extends RecyclerView.Adapter<SNSRecyclerAdapter.
             @Override
             public void onClick(View v) {
                 intent = new Intent(v.getContext(), CommentActivity.class);
+                intent.putExtra("Key",Keylist.get(position));
                 mContext.startActivity(intent);
             }
         });
@@ -184,6 +226,7 @@ public class SNSRecyclerAdapter extends RecyclerView.Adapter<SNSRecyclerAdapter.
             @Override
             public void onClick(View v) {
                 intent = new Intent(v.getContext(),LikeUserActivity.class);
+                intent.putExtra("Key",Keylist.get(position));
                 mContext.startActivity(intent);
             }
         });

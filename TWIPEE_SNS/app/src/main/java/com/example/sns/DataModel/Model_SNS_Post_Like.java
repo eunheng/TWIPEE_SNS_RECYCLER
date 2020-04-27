@@ -3,6 +3,9 @@ package com.example.sns.DataModel;
 public class Model_SNS_Post_Like {
     private  String user_id;
 
+    public Model_SNS_Post_Like(String user_id){
+        this.user_id = user_id;
+    }
     public String getUser_id() {
         return user_id;
     }

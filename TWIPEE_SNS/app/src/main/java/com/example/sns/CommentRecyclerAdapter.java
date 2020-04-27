@@ -16,6 +16,7 @@ import com.example.sns.DataModel.DataModelComment;
 import com.example.sns.DataModel.Model_SNS_Post;
 import com.example.sns.DataModel.DataModelUser;
 import com.example.sns.DataModel.DataModelUserSetting;
+import com.example.sns.DataModel.Model_SNS_Post_Comment;
 
 import java.util.ArrayList;
 
@@ -29,11 +30,11 @@ public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecycler
     private Intent intent;
     private String currentUsername = "";
 
-    private ArrayList<DataModelComment> list = new ArrayList<>();
+    private ArrayList<Model_SNS_Post_Comment> list = new ArrayList<>();
 
     private int temp = 0;
 
-    public CommentRecyclerAdapter(@NonNull Context context, ArrayList<DataModelComment> list){
+    public CommentRecyclerAdapter(@NonNull Context context, ArrayList<Model_SNS_Post_Comment> list){
         this.mContext = context;
         this.list = list;
     }
@@ -51,11 +52,11 @@ public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecycler
         int itemposition = position;
 
         //유저 이름
-        holder.username.setText(list.get(itemposition).getUser_id());
+        holder.username.setText(list.get(itemposition).getPublisherID());
         //댓글 내용
-        holder.comment.setText(list.get(itemposition).getComment());
+        holder.comment.setText(list.get(itemposition).getBody());
         //올린 시간
-        holder.timeDetla.setText(list.get(itemposition).getDate_created());
+        holder.timeDetla.setText(list.get(itemposition).getCreatedDate());
 
         //아이템 내의 component에 대한 클릭 리스너 정의
         holder.username.setOnClickListener(this);

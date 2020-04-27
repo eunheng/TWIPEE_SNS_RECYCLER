@@ -2,6 +2,7 @@ package com.example.sns;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +18,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.sns.DataModel.DataModelComment;
-import com.example.sns.DataModel.DataModelLike;
 import com.example.sns.DataModel.Model_SNS_Post;
 import com.example.sns.DataModel.DataModelUserSetting;
 import com.google.firebase.database.DataSnapshot;
@@ -34,12 +33,15 @@ import java.util.Map;
 public class SNSView extends Fragment implements View.OnClickListener{
 
     private DatabaseReference mDatabase;
-    private ArrayList<Model_SNS_Post> list = new ArrayList<>();
+    private ArrayList<Model_SNS_Post> Postdata = new ArrayList<>();
+    private ArrayList<String> Postkey = new ArrayList<>();
+    private HashMap<String, Model_SNS_Post> SNS_Post_list = new HashMap<String, Model_SNS_Post>();
     private HashMap<String, String> category1 = new HashMap<>();
     private HashMap<String, String> category2 = new HashMap<>();
     private HashMap<String, String> category3 = new HashMap<>();
     private HashMap<String, String> category4 = new HashMap<>();
     private HashMap<String, String> listImage = new HashMap<>();
+
 
     //widget
     private EditText et_feedSearchBox;
@@ -69,22 +71,21 @@ public class SNSView extends Fragment implements View.OnClickListener{
         //postFirebaseDatabase(true);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.limitToLast(3).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                int i = 0;
                 for(DataSnapshot item : dataSnapshot.child("SNS").getChildren()){
-//                    test = item.getValue(Model_SNS_Post.class);
-                    list.add(item.getValue(Model_SNS_Post.class));
-//                    list_get.add(0,item.getValue(Model_SNS_Post.class));
-//                    oldlist_get.add(item.getKey());
+                    Postkey.add(item.getKey());
+                    Postdata.add(item.getValue(Model_SNS_Post.class));
+                    SNS_Post_list.put(Postkey.get(i),Postdata.get(i));
+                    i++;
                 }
 //                oldestPostId = oldlist_get.get(0);
-
                 fm = getActivity().getSupportFragmentManager();
                 recyclerView.setHasFixedSize(true);
-                adapter = new SNSRecyclerAdapter(getActivity(), list,fm );
-
+                adapter = new SNSRecyclerAdapter(getActivity(), SNS_Post_list,fm );
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                 recyclerView.setAdapter(adapter);
             }
@@ -138,20 +139,8 @@ public class SNSView extends Fragment implements View.OnClickListener{
                 super.onScrollStateChanged(recyclerView, newState);
             }
         });
-
-
         return view;
     }
-
-//    private void initRecyclerViewRefresh() {
-//        list.add(modelSNSPost);
-//        list.add(modelSNSPost);
-//        recyclerView.setHasFixedSize(true);
-//        fm = getActivity().getSupportFragmentManager();
-//        adapter = new SNSRecyclerAdapter(getActivity(), list, fm);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-//        recyclerView.setAdapter(adapter);
-//    }
 
     @Override
     public void onClick(View view) {
@@ -177,7 +166,6 @@ public class SNSView extends Fragment implements View.OnClickListener{
         Map<String, Object> childUpdates = new HashMap<>();
         Map<String, Object> postValues = null;
         if(add){
-//            Model_SNS_Post post = new Model_SNS_Post("PostType1", "CreatedData1", "PublisherID1", "Body1", "MapImage1", "Step1", "Period1", "MemberNumber1", "Cost1", "Traffic1", listImage, category1,0,0);
             Model_SNS_Post post = new Model_SNS_Post("PostType8", "CreatedData8", "PublisherID8", "Body8", "MapImage8", "Step8", "Period8", "MemberNumber8", "Cost8", "Traffic8", listImage, category4,0,0);
             postValues = post.SNStoMap();
         }

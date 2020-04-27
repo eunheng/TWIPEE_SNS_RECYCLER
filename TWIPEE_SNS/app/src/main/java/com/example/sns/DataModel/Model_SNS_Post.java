@@ -3,14 +3,12 @@ package com.example.sns.DataModel;
 import com.google.firebase.database.Exclude;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class Model_SNS_Post implements Serializable {
+public class Model_SNS_Post implements Serializable{
     private String PostType;
-    private String CreatedData;
+    private String CreatedDate;
     private String PublisherID;
     private String Body;
     private String MapImage;
@@ -29,10 +27,10 @@ public class Model_SNS_Post implements Serializable {
         //super();
     }
 
-    public Model_SNS_Post(String PostType, String CreatedData, String PublisherID, String Body, String MapImage, String Step, String Period, String MemberNumber,
+    public Model_SNS_Post(String PostType, String CreatedDate, String PublisherID, String Body, String MapImage, String Step, String Period, String MemberNumber,
                           String Cost, String Traffic, HashMap<String, String> Photo, HashMap<String, String> Category, int LikeCount, int CommentCount) {
         this.PostType = PostType;
-        this.CreatedData = CreatedData;
+        this.CreatedDate = CreatedDate;
         this.PublisherID = PublisherID;
         this.Body = Body;
         this.MapImage = MapImage;
@@ -56,12 +54,12 @@ public class Model_SNS_Post implements Serializable {
         PostType = postType;
     }
 
-    public String getCreatedData() {
-        return CreatedData;
+    public String getCreatedDate() {
+        return CreatedDate;
     }
 
-    public void setCreatedData(String createdData) {
-        CreatedData = createdData;
+    public void setCreatedDate(String createdDate) {
+        CreatedDate = createdDate;
     }
 
     public String getPublisherID() {
@@ -164,7 +162,7 @@ public class Model_SNS_Post implements Serializable {
     public Map<String, Object> SNStoMap(){
         HashMap<String, Object> result = new HashMap<>();
         result.put("PostType", PostType);
-        result.put("CreatedData", CreatedData);
+        result.put("CreatedDate", CreatedDate);
         result.put("PublisherID", PublisherID);
         result.put("Body", Body);
         result.put("MapImage", MapImage);
