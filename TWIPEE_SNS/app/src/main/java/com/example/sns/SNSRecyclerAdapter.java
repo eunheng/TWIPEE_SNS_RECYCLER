@@ -19,6 +19,8 @@ import com.bumptech.glide.Glide;
 import com.example.sns.DataModel.Model_SNS_Post;
 import com.example.sns.DataModel.DataModelUser;
 import com.example.sns.DataModel.DataModelUserSetting;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -148,22 +150,40 @@ public class SNSRecyclerAdapter extends RecyclerView.Adapter<SNSRecyclerAdapter.
 //            holder.vp_post.setVisibility(View.GONE);
 //        }
 
-
-
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-        //image viewpager 임시 데이터(파이어베이스에 저장된 사진 갯수를 어떻게 알 수 있지)
-        //저장소 주소는 알아냈는데 그 아래 복수의 이미지를 어케 가지고 올 것인가....
-
         //이미지 배열
         listImage = new ArrayList<>();
         listImage2 = new ArrayList<>();
-        //스토리지에서 스트링으로 가져오기
-        //strViewpager = storageReference.getDownloadUrl().toString();
-        strViewpager = Glide.with(mContext).load(storageReference).toString();
+
+        //torageReference storageReference = FirebaseStorage.getInstance().getReference();
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageReference = storage.getReferenceFromUrl("gs://snsview-75df8.appspot.com/");
+
+        //다운로드할 파일을 가르키는 참조 만들기
+        StorageReference pathReference = storageReference.child("/");
+
+        //Url을 다운받기
+        pathReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Toast.makeText(mContext.getApplicationContext(), "다운로드 성공 : "+ uri, Toast.LENGTH_SHORT).show();
+                listImage2.add(uri.toString());
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(mContext.getApplicationContext(), "다운로드 실패", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        //image viewpager 임시 데이터(파이어베이스에 저장된 사진 갯수를 어떻게 알 수 있지)
+        //저장소 주소는 알아냈는데 그 아래 복수의 이미지를 어케 가지고 올 것인가....
+
+        //strViewpager = Glide.with(mContext).load(storageReference).toString();
         //인트형으로 변환
 //        intViewpager = Integer.parseInt(strViewpager);
 //        //
-        listImage2.add(strViewpager);
         //ImageView pager
         holder.vp_post.setAdapter(holder.pagerAdapter);
         if(listImage2.size()!=0)
