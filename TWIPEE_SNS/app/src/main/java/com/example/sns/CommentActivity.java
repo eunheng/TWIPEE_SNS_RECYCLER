@@ -58,6 +58,8 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
         initView();
+        Intent intent = getIntent();
+        Key = intent.getExtras().getString("Key");
         loadFirebaseDatabase();
     }
 
@@ -105,6 +107,9 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.btn_addComment:    //댓글 달기
                 postFirebaseDatabase(true);
                 loadFirebaseDatabase();
+                Map<String, Object> childUpdates = new HashMap<>();
+                childUpdates.put("/SNS/" + Key + "/CommentCount", Postcommentdata.size()+1);
+                mDatabase.updateChildren(childUpdates);
                 break;
             default:
                 break;
@@ -132,29 +137,25 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void loadFirebaseDatabase(){
-        Intent intent = getIntent();
-        Key = intent.getExtras().getString("Key");
-
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                int i = 0;
+                Postcommentdata = new ArrayList<>();
+//                int i = 0;
                 for(DataSnapshot item : dataSnapshot.child("SNS_POST_COMMENT").child(Key).getChildren()){
                     Postcommentdata.add(item.getValue(Model_SNS_Post_Comment.class));
                 }
-
                 CommentRecyclerView.setHasFixedSize(true);
                 CommentRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+                adapter = new CommentRecyclerAdapter(context, Postcommentdata);
+                CommentRecyclerView.setAdapter(adapter);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(context, "예상치 못한 오류가 발생했습니다. 다시 실행해주세요.", Toast.LENGTH_SHORT).show();
             }
         });
-        adapter = new CommentRecyclerAdapter(context, Postcommentdata);
-        adapter.notifyDataSetChanged();
-        CommentRecyclerView.setAdapter(adapter);
+
     }
 }

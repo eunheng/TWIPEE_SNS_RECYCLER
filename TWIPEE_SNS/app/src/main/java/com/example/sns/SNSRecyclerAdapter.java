@@ -2,6 +2,7 @@ package com.example.sns;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -150,58 +151,58 @@ public class SNSRecyclerAdapter extends RecyclerView.Adapter<SNSRecyclerAdapter.
 //            holder.vp_post.setVisibility(View.GONE);
 //        }
 
-        //이미지 배열
-        listImage = new ArrayList<>();
-        listImage2 = new ArrayList<>();
-
-        //torageReference storageReference = FirebaseStorage.getInstance().getReference();
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageReference = storage.getReferenceFromUrl("gs://snsview-75df8.appspot.com/");
-
-        //다운로드할 파일을 가르키는 참조 만들기
-        StorageReference pathReference = storageReference.child("/");
-
-        //Url을 다운받기
-        pathReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Toast.makeText(mContext.getApplicationContext(), "다운로드 성공 : "+ uri, Toast.LENGTH_SHORT).show();
-                listImage2.add(uri.toString());
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(mContext.getApplicationContext(), "다운로드 실패", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-        //image viewpager 임시 데이터(파이어베이스에 저장된 사진 갯수를 어떻게 알 수 있지)
-        //저장소 주소는 알아냈는데 그 아래 복수의 이미지를 어케 가지고 올 것인가....
-
-        //strViewpager = Glide.with(mContext).load(storageReference).toString();
-        //인트형으로 변환
-//        intViewpager = Integer.parseInt(strViewpager);
-//        //
-        //ImageView pager
-        holder.vp_post.setAdapter(holder.pagerAdapter);
-        if(listImage2.size()!=0)
-        {
-            holder.vp_post.setVisibility(View.VISIBLE);
-            for (int i = 0; i < listImage2.size(); i++) {
-                SNSPostViewPager postViewPager = new SNSPostViewPager();
-                Bundle bundle = new Bundle();
-                bundle.putString("imgRes", listImage2.get(i));
-                postViewPager.setArguments(bundle);
-                holder.pagerAdapter.addImage(postViewPager);
-            }
-            holder.pagerAdapter.notifyDataSetChanged();
-        }
-        else
-        {
-            holder.vp_post.setVisibility(View.GONE);
-        }
+//        //이미지 배열
+//        listImage = new ArrayList<>();
+//        listImage2 = new ArrayList<>();
+//
+//        //torageReference storageReference = FirebaseStorage.getInstance().getReference();
+//        FirebaseStorage storage = FirebaseStorage.getInstance();
+//        StorageReference storageReference = storage.getReferenceFromUrl("gs://snsview-75df8.appspot.com/");
+//
+//        //다운로드할 파일을 가르키는 참조 만들기
+//        StorageReference pathReference = storageReference.child("/");
+//
+//        //Url을 다운받기
+//        pathReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//            @Override
+//            public void onSuccess(Uri uri) {
+//                Toast.makeText(mContext.getApplicationContext(), "다운로드 성공 : "+ uri, Toast.LENGTH_SHORT).show();
+//                listImage2.add(uri.toString());
+//
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                Toast.makeText(mContext.getApplicationContext(), "다운로드 실패", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//
+//        //image viewpager 임시 데이터(파이어베이스에 저장된 사진 갯수를 어떻게 알 수 있지)
+//        //저장소 주소는 알아냈는데 그 아래 복수의 이미지를 어케 가지고 올 것인가....
+//
+//        //strViewpager = Glide.with(mContext).load(storageReference).toString();
+//        //인트형으로 변환
+////        intViewpager = Integer.parseInt(strViewpager);
+////        //
+//        //ImageView pager
+//        holder.vp_post.setAdapter(holder.pagerAdapter);
+//        if(listImage2.size()!=0)
+//        {
+//            holder.vp_post.setVisibility(View.VISIBLE);
+//            for (int i = 0; i < listImage2.size(); i++) {
+//                SNSPostViewPager postViewPager = new SNSPostViewPager();
+//                Bundle bundle = new Bundle();
+//                bundle.putString("imgRes", listImage2.get(i));
+//                postViewPager.setArguments(bundle);
+//                holder.pagerAdapter.addImage(postViewPager);
+//            }
+//            holder.pagerAdapter.notifyDataSetChanged();
+//        }
+//        else
+//        {
+//            holder.vp_post.setVisibility(View.GONE);
+//        }
 
 
 
